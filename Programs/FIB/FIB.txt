@@ -1,0 +1,47 @@
+next = 0   | 15
+second = 1 | 14
+first = 0  | 13
+
+
+next = first + second:
+	LDA 13	1D
+	ADD 14	5E
+	STA 15  3F
+
+first = second:
+	LDA 14 1E
+	STA 13 3D
+
+second = next:
+	LDA 15 1F
+	STA 14 3E
+out next:
+	OUT    70
+
+	JMP 0  80
+
+LOADA 13	
+ADD 14
+STOREA 15  
+LOADA 14  
+STOREA 13  
+LOADA 15 
+STOREA 14  
+OUT    	
+LOADB 12
+JUMPEQUAL 11
+JUMP 0  
+HALT
+
+
+int next = 0;
+int second = 1;
+int first = 0;
+
+while (next != E9) {
+	next = first + second;
+	first = second;
+	second = next;
+	print(next);
+}
+die();
